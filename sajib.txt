@@ -1,0 +1,183 @@
+----------Token
+
+
+#include<stdio.h>
+#define MAXCHAR 1000
+int main()
+{
+    FILE *fp,*fp2;
+    char str[MAXCHAR];
+    fp = fopen("class.txt","r");
+    fp2 = fopen("class2.txt","w");
+    char *token;
+    while(fgets(str,MAXCHAR,fp)!=NULL)
+    {
+        token = strtok(str," ");
+        while(token!=NULL)
+        {
+            fputs(token,fp2);
+            fputs("\n",fp2);
+            token = strtok(NULL," ");
+        }
+    }
+    fclose(fp);
+     fclose(fp2);
+    return 0;
+}
+
+
+-------------Comment
+
+
+#include<stdio.h>
+int main()
+{
+    FILE *file1,*file2;
+    char ch;
+
+    file1 = fopen("comment.txt","r");
+    file2 = fopen("comRem.txt","w");
+
+    while((ch=fgetc(file1))!=EOF)
+    {
+        if(ch=='/')
+        {
+            ch = fgetc(file1);
+            if(ch=='/')
+            {
+                while(ch=fgetc(file1)!='\n');
+            }
+            else if(ch=='*')
+            {
+                while((ch=fgetc(file1))!=EOF)
+                {
+                    if((ch=fgetc(file1))=='*' && (ch=fgetc(file1))=='/')
+                    {
+                        ch='\n';
+                        break;
+                    }
+                }
+            }
+            else
+                fputc('/',file2);
+        }
+        fputc(ch,file2);
+    }
+    fclose(file1);
+    fclose(file2);
+    return 0;
+}
+
+-------- white
+
+
+#include <stdio.h>
+#define MAXCHAR 1000
+int main(){
+
+FILE *fp,*fp2;
+    char str[MAXCHAR];
+    char blank[100];
+    int c=0,d=0;
+    //char* filename ="E:\\txt.txt";
+    fp=fopen("white.txt","r");
+    fp2=fopen("whiteSpace2.txt","w");
+
+    while(fgets(str,MAXCHAR,fp)!=NULL)
+        printf("%s\n",str);
+
+    while(str[c]!='\0')
+    {
+        if(!(str[c]==' '&& str[c+1]==' ')){
+            blank[d] =str[c];
+            d++;
+        }
+        c++;
+    }
+    blank[d]='\0';
+    //printf("text after removing blank space\n%s\n",blank);
+    fputs(blank,fp2);
+    fclose(fp);
+    fclose(fp2);
+}
+
+--------- array
+
+#include<stdio.h>
+int main()
+{
+    int n,p,v,i,temp;
+    scanf("%d",&n);
+    int array[n];
+    for(i=0;i<n-1;i++)
+    {
+        scanf("%d",&array[i]);
+    }
+    printf("Enter the position of array :");
+    scanf("%d",&p);
+    if(p>=n){
+        printf("Invalid position");
+        return 0;
+    }
+        else{
+            printf("Enter value :");
+            scanf("%d",&v);
+
+        }
+        for(i=p;i<n;i++){
+        temp=array[p];
+        array[p]=v;
+        v=temp;
+        p++;
+        }
+
+        for(i=0;i<n;i++){
+            printf("%d",array[i]);
+        }
+        return 0;
+
+}
+
+
+---- array2
+
+#include <stdio.h>
+
+int main()
+{
+  int n, a[100], b[100], count = 0, c, d;
+
+  printf("Enter number of elements in array\n");
+  scanf("%d", &n);
+
+  printf("Enter %d integers\n", n);
+
+  for (c = 0; c < n; c++)
+    scanf("%d", &a[c]);
+
+  for (c = 0; c < n; c++)
+  {
+    for (d = 0; d < count; d++)
+    {
+      if(a[c] == b[d])
+        break;
+    }
+    if (d == count)
+    {
+      b[count] = a[c];
+      count++;
+    }
+  }
+
+  printf("Array obtained after removing duplicate elements:\n");
+
+  for (c = 0; c < count; c++)
+    printf("%d\n", b[c]);
+
+  return 0;
+}
+
+
+
+
+
